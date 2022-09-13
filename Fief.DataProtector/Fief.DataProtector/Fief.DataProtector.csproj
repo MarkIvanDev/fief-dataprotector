@@ -1,0 +1,51 @@
+﻿<Project Sdk="MSBuild.Sdk.Extras/3.0.44">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;uap10.0.17763</TargetFrameworks>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+    <LangVersion>7.3</LangVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <PackageId>Fief.DataProtector</PackageId>
+    <Description>Encrypt and decrypt data using UWP's DataProtectionProvider</Description>
+    <PackageTags>uwp encrypt decrypt</PackageTags>
+    <PackageVersion>1.0.0</PackageVersion>
+    <Authors>markivan.basto</Authors>
+    <Copyright>(c) 2022 Mark Ivan Basto</Copyright>
+    <PackageProjectUrl>https://github.com/MarkIvanDev/fief-dataprotector</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/MarkIvanDev/fief-dataprotector.git</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+    <DefineConstants>$(DefineConstants);NETSTANDARD</DefineConstants>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
+    <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
+    <TargetPlatformVersion>10.0.19041.0</TargetPlatformVersion>
+    <TargetPlatformMinVersion>10.0.17763.0</TargetPlatformMinVersion>
+    <DefineConstants>$(DefineConstants);UWP</DefineConstants>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Include="**\*.shared.cs" />
+    <Compile Include="**\*.shared.*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('netstandard')) ">
+    <Compile Include="**\*.netstandard.cs" />
+    <Compile Include="**\*.netstandard.*.cs" />
+  </ItemGroup>
+
+  <ItemGroup Condition=" $(TargetFramework.StartsWith('uap10.0')) ">
+    <Compile Include="**\*.uwp.cs" />
+    <Compile Include="**\*.uwp.*.cs" />
+  </ItemGroup>
+
+</Project>
